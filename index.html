@@ -4,34 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Addition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #0a0a2a;
+            color: #00fff2;
             max-width: 600px;
             margin: 50px auto;
             padding: 20px;
         }
         .calculator {
-            background-color: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(145deg, #0f0f35, #1a1a4a);
+            padding: 30px;
+            border: 2px solid #00fff2;
+            border-radius: 20px;
+            box-shadow: 0 0 20px #00fff2, inset 0 0 20px rgba(0, 255, 242, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        .calculator::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0, 255, 242, 0.1) 10px,
+                rgba(0, 255, 242, 0.1) 20px
+            );
+            animation: grid-animation 20s linear infinite;
+            z-index: 0;
+        }
+        @keyframes grid-animation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .calculator > * {
+            position: relative;
+            z-index: 1;
         }
         input {
-            padding: 8px;
-            margin: 5px;
-            width: 100px;
+            font-family: 'Orbitron', sans-serif;
+            padding: 12px;
+            margin: 10px;
+            width: 120px;
+            background: rgba(0, 255, 242, 0.1);
+            border: 2px solid #00fff2;
+            border-radius: 10px;
+            color: #00fff2;
+            text-shadow: 0 0 5px #00fff2;
+            outline: none;
+        }
+        input:focus {
+            box-shadow: 0 0 15px #00fff2;
         }
         button {
-            padding: 8px 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
+            padding: 12px 24px;
+            background: transparent;
+            color: #00fff2;
+            border: 2px solid #00fff2;
+            border-radius: 10px;
             cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 5px #00fff2;
+            margin-left: 10px;
         }
         button:hover {
-            background-color: #45a049;
+            background: #00fff2;
+            color: #0a0a2a;
+            box-shadow: 0 0 20px #00fff2;
+        }
+        h2 {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #00fff2;
+        }
+        h3 {
+            margin-top: 30px;
+            text-shadow: 0 0 8px #00fff2;
+        }
+        span {
+            font-size: 1.2em;
+            margin: 0 10px;
+            text-shadow: 0 0 5px #00fff2;
+        }
+        #result {
+            font-size: 1.5em;
+            font-weight: bold;
         }
     </style>
 </head>
