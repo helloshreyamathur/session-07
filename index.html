@@ -2,98 +2,115 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Number Addition Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Braun Calculator</title>
     <style>
         body {
-            font-family: "Times New Roman", Times, serif;
-            background: #008080;
-            color: yellow;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        table {
-            border: 2px outset #c0c0c0;
-            background: #808080;
-            margin: 20px auto;
-            padding: 10px;
+
+        .calculator {
+            background-color: #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 320px;
         }
-        td {
-            padding: 5px;
+
+        .display {
+            background-color: #c7c7c7;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            text-align: right;
+            font-size: 36px;
+            font-weight: 300;
+            color: #333;
+            height: 50px;
+            overflow: hidden;
         }
-        input {
-            font-family: "Courier New", Courier, monospace;
-            border: 2px inset #c0c0c0;
-            background: #ffffff;
-            width: 100px;
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
         }
+
         button {
-            font-family: "Times New Roman", Times, serif;
-            font-weight: bold;
-            color: #000000;
-            background: #c0c0c0;
-            border: 3px outset #ffffff;
-            padding: 2px 10px;
-            cursor: pointer;
-        }
-        button:active {
-            border-style: inset;
-        }
-        h1 {
-            color: #ffff00;
-            text-decoration: underline;
-            text-align: center;
+            font-family: inherit;
             font-size: 24px;
+            padding: 20px;
+            border: none;
+            background-color: #f0f0f0;
+            color: #333;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 300;
         }
-        marquee {
-            color: #ff00ff;
-            font-weight: bold;
-            background: #000080;
-            margin: 10px 0;
+
+        button:hover {
+            background-color: #e4e4e4;
         }
-        blink {
-            animation: blinker 1s linear infinite;
+
+        button:active {
+            background-color: #d4d4d4;
         }
-        @keyframes blinker {
-            50% { opacity: 0; }
+
+        button.operator {
+            background-color: #d4d4d4;
+        }
+
+        button.equals {
+            background-color: #ff5722;
+            color: white;
+        }
+
+        button.equals:hover {
+            background-color: #f4511e;
+        }
+
+        button.clear {
+            background-color: #c7c7c7;
         }
     </style>
 </head>
-<body bgcolor="#008080">
-    <marquee scrollamount="5">*** Welcome to the Amazing Number Calculator! ***</marquee>
-    <table border="0" cellspacing="0" cellpadding="5" align="center" width="500">
-        <tr>
-            <td colspan="4" align="center">
-                <h1><font color="yellow">NUMBER CALCULATOR</font></h1>
-                <img src="https://web.archive.org/web/19961219233921/http://www.geocities.com/Area51/8080/line.gif" alt="divider" width="400" height="2">
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <table bgcolor="#808080" border="2" cellpadding="5" cellspacing="0">
-                    <tr>
-                        <td align="center">
-                            <input type="text" id="num1" size="10" style="font-family: 'Courier New'">
-                            <font color="white" size="+1"><b>+</b></font>
-                            <input type="text" id="num2" size="10" style="font-family: 'Courier New'">
-                            <br><br>
-                            <button onclick="addNumbers()">Calculate Now!</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                            <blink><font color="lime">Result:</font></blink> 
-                            <font color="white"><b><span id="result">0</span></b></font>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <font size="-1" color="yellow">Best viewed in Netscape Navigator 2.0</font>
-            </td>
-        </tr>
-    </table>
-    <img src="https://web.archive.org/web/19961219233921/http://www.geocities.com/Area51/8080/construction.gif" alt="Under Construction" width="50" height="50">
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="clear" onclick="clearDisplay()">C</button>
+            <button onclick="handleOperator('/')">/</button>
+            <button onclick="handleOperator('*')">×</button>
+            <button onclick="handleOperator('-')">−</button>
+            
+            <button onclick="appendNumber('7')">7</button>
+            <button onclick="appendNumber('8')">8</button>
+            <button onclick="appendNumber('9')">9</button>
+            <button class="operator" onclick="handleOperator('+')">+</button>
+            
+            <button onclick="appendNumber('4')">4</button>
+            <button onclick="appendNumber('5')">5</button>
+            <button onclick="appendNumber('6')">6</button>
+            <button onclick="calculateResult()" class="equals">=</button>
+            
+            <button onclick="appendNumber('1')">1</button>
+            <button onclick="appendNumber('2')">2</button>
+            <button onclick="appendNumber('3')">3</button>
+            <button onclick="appendNumber('0')">0</button>
+            
+            <button onclick="appendNumber('00')">00</button>
+            <button onclick="appendDecimal()">.</button>
+            <button onclick="deleteLastChar()">←</button>
+            <button onclick="calculatePercentage()">%</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
